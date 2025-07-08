@@ -1,0 +1,21 @@
+name: 'kbum-watcher'
+networks:
+    kbumwatcher:
+        driver: bridge
+services:
+  postgres:
+    container_name: 'kbum-watcher-db'
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - 'POSTGRES_DB=kbumwatcher'
+      - 'POSTGRES_PASSWORD=kbum'
+      - 'POSTGRES_USER=kbum'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    networks:
+      - kbumwatcher
+
+volumes:
+  postgresql_data:
