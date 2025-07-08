@@ -1,0 +1,39 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: JDK setup
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Maven cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Tests and build
+        run: mvn clean verify
+
+      - name: Test reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: target/ci-reports/
