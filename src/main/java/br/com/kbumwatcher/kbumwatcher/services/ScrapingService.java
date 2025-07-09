@@ -42,8 +42,8 @@ public class ScrapingService {
     }
 
     @Scheduled(cron = "0 0 9 * * *")
-    public void scrapeProducts(String keyword) throws InterruptedException {
-        keyword = keyword == null || keyword.isEmpty() ? "Cadeira" : keyword;
+    public void scrapeProducts() throws InterruptedException {
+        String keyword = "Cadeira";
         WebDriver driver = createDriver();
         WebElement searchInput = driver.findElement(By.id("inputBusca"));
         List<Product> products = new ArrayList<>();
