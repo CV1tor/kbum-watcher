@@ -21,7 +21,7 @@ public class ProductSearchController {
     private final ScrapingService scrapingService;
     private final ProductSearchService productSearchService;
 
-    @PostMapping
+/*    @PostMapping
     public ResponseEntity<Void> searchProduct(@RequestParam String keyword) {
         try {
             scrapingService.scrapeProducts(keyword);
@@ -31,7 +31,7 @@ public class ProductSearchController {
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    }*/
 
     @GetMapping
     public ResponseEntity<List<ProductSearch>> getProductsByKeyword(@RequestParam String keyword) {
