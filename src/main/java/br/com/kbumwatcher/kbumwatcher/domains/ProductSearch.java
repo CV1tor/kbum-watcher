@@ -3,6 +3,7 @@ package br.com.kbumwatcher.kbumwatcher.domains;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ProductSearch {
+public class ProductSearch implements Serializable {
     @Id @GeneratedValue
     private Long id;
 
