@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -40,7 +41,9 @@ public class ScrapingService {
         return new BigDecimal(price.replace("R$ ", "").replace(".", "").replace(",", "."));
     }
 
+    @Scheduled(cron = "0 0 9 * * *")
     public void scrapeProducts(String keyword) throws InterruptedException {
+        keyword = keyword == null || keyword.isEmpty() ? "Cadeira" : keyword;
         WebDriver driver = createDriver();
         WebElement searchInput = driver.findElement(By.id("inputBusca"));
         List<Product> products = new ArrayList<>();
